@@ -1,5 +1,6 @@
-package com.ethan.distributed_chat_backend;
+package com.ethan.distributed_chat_backend.repository;
 
+import com.ethan.distributed_chat_backend.model.Message;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

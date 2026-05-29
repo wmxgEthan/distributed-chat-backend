@@ -1,4 +1,4 @@
-package com.ethan.distributed_chat_backend;
+package com.ethan.distributed_chat_backend.model;
 
 public class Message {
 

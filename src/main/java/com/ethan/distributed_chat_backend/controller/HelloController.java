@@ -1,5 +1,7 @@
-package com.ethan.distributed_chat_backend;
+package com.ethan.distributed_chat_backend.controller;
 
+import com.ethan.distributed_chat_backend.model.Message;
+import com.ethan.distributed_chat_backend.service.MessageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,5 +1,7 @@
-package com.ethan.distributed_chat_backend;
+package com.ethan.distributed_chat_backend.service;
 
+import com.ethan.distributed_chat_backend.model.Message;
+import com.ethan.distributed_chat_backend.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
