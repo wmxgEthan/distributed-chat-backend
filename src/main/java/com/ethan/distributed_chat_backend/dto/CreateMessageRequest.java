@@ -1,0 +1,31 @@
+package com.ethan.distributed_chat_backend.dto;
+
+public class CreateMessageRequest {
+
+    private String senderUsername;
+    private String content;
+
+    public CreateMessageRequest() {
+    }
+
+    public CreateMessageRequest(String senderUsername, String content) {
+        this.senderUsername = senderUsername;
+        this.content = content;
+    }
+
+    public String getSenderUsername() {
+        return senderUsername;
+    }
+
+    public void setSenderUsername(String senderUsername) {
+        this.senderUsername = senderUsername;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+}

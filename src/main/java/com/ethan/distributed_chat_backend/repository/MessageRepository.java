@@ -3,20 +3,27 @@ package com.ethan.distributed_chat_backend.repository;
 import com.ethan.distributed_chat_backend.model.Message;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class MessageRepository {
 
-    private List<Message> messages =
-            new ArrayList<>();
+    private final Map<Long, List<Message>> messagesByRoom = new HashMap<>();
 
-    public void save(Message message) {
-        messages.add(message);
+    private Long nextId = 1L;
+
+    public Message save(Long roomId, Message message) {
+
+        message.setId(nextId++);
+
+        messagesByRoom
+                .computeIfAbsent(roomId, k -> new ArrayList<>())
+                .add(message);
+
+        return message;
     }
 
-    public List<Message> getAll() {
-        return messages;
+    public List<Message> getMessagesForRoom(Long roomId) {
+        return messagesByRoom.getOrDefault(roomId, new ArrayList<>());
     }
 }
