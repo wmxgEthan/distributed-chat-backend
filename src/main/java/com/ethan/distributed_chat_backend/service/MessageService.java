@@ -22,8 +22,12 @@ public class MessageService {
         this.roomRepository = roomRepository;
     }
 
-    public Message createMessage(Long roomId,
-                                 CreateMessageRequest request) {
+    public Message createMessage(Long roomId, CreateMessageRequest request) {
+
+        if (request.getContent() == null ||
+                request.getContent().isBlank()) {
+            return null;
+        }
 
         Room room = roomRepository.findById(roomId);
 
@@ -42,6 +46,13 @@ public class MessageService {
     }
 
     public List<Message> getMessagesForRoom(Long roomId) {
+
+        Room room = roomRepository.findById(roomId);
+
+        if (room == null) {
+            return null;
+        }
+
         return messageRepository.getMessagesForRoom(roomId);
     }
 }

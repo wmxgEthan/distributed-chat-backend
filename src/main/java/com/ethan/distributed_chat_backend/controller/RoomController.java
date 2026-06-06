@@ -26,4 +26,9 @@ public class RoomController {
     public Collection<Room> getRooms() {
         return roomService.getRooms();
     }
+
+    @GetMapping("/{id}")
+    public Room getRoom(@PathVariable Long id) {
+        return roomService.getRoom(id);
+    }
 }

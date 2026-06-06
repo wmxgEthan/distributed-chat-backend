@@ -16,9 +16,19 @@ public class RoomService {
     }
 
     public Room createRoom(CreateRoomRequest request) {
+
+        if (request.getName() == null ||
+                request.getName().isBlank()) {
+            return null;
+        }
+
         Room newRoom = new Room();
         newRoom.setName(request.getName());
         return roomRepository.save(newRoom);
+    }
+
+    public Room getRoom(Long id) {
+        return roomRepository.findById(id);
     }
 
     public Collection<Room> getRooms() {
