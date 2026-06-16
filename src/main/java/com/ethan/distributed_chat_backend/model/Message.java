@@ -1,9 +1,17 @@
 package com.ethan.distributed_chat_backend.model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "messages")
 public class Message {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private Long roomId;
     private String senderUsername;

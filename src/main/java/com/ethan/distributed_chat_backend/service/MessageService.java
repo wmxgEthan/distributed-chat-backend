@@ -24,12 +24,11 @@ public class MessageService {
 
     public Message createMessage(Long roomId, CreateMessageRequest request) {
 
-        if (request.getContent() == null ||
-                request.getContent().isBlank()) {
+        if (request.getContent() == null || request.getContent().isBlank()) {
             return null;
         }
 
-        Room room = roomRepository.findById(roomId);
+        Room room = roomRepository.findById(roomId).orElse(null);
 
         if (room == null) {
             return null;
@@ -42,17 +41,17 @@ public class MessageService {
         message.setContent(request.getContent());
         message.setTimestamp(LocalDateTime.now());
 
-        return messageRepository.save(roomId, message);
+        return messageRepository.save(message);
     }
 
     public List<Message> getMessagesForRoom(Long roomId) {
 
-        Room room = roomRepository.findById(roomId);
+        Room room = roomRepository.findById(roomId).orElse(null);
 
         if (room == null) {
             return null;
         }
 
-        return messageRepository.getMessagesForRoom(roomId);
+        return messageRepository.findByRoomId(roomId);
     }
 }

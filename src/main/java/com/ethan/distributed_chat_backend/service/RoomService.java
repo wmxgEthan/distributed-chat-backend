@@ -17,8 +17,7 @@ public class RoomService {
 
     public Room createRoom(CreateRoomRequest request) {
 
-        if (request.getName() == null ||
-                request.getName().isBlank()) {
+        if (request.getName() == null || request.getName().isBlank()) {
             return null;
         }
 
@@ -28,7 +27,7 @@ public class RoomService {
     }
 
     public Room getRoom(Long id) {
-        return roomRepository.findById(id);
+        return roomRepository.findById(id).orElse(null);
     }
 
     public Collection<Room> getRooms() {

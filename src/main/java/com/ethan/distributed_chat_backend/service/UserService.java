@@ -17,13 +17,11 @@ public class UserService {
 
     public User register(RegisterRequest request) {
 
-        if (request.getUsername() == null ||
-                request.getUsername().isBlank()) {
+        if (request.getUsername() == null || request.getUsername().isBlank()) {
             return null;
         }
 
-        if (request.getPassword() == null ||
-                request.getPassword().isBlank()) {
+        if (request.getPassword() == null || request.getPassword().isBlank()) {
             return null;
         }
 
