@@ -4,14 +4,14 @@ public class CreateMessageRequest {
 
     private String senderUsername;
     private String content;
+    private Long roomId;
 
     public CreateMessageRequest() {
     }
 
-    public CreateMessageRequest(String senderUsername, String content) {
-        this.senderUsername = senderUsername;
-        this.content = content;
-    }
+    public Long getRoomId() { return roomId; }
+
+    public void setRoomId(Long roomId) { this.roomId = roomId; }
 
     public String getSenderUsername() {
         return senderUsername;

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+
+<h2>Chat Test</h2>
+
+<input id="message" type="text">
+<button onclick="sendMessage()">Send</button>
+
+<ul id="messages"></ul>
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
+
+<script>
+
+    let stompClient;
+
+    const socket = new SockJS('/chat');
+
+    stompClient = Stomp.over(socket);
+
+    function displayMessage(message) {
+
+        const li = document.createElement("li");
+
+        li.innerText =
+            message.senderUsername + ": " + message.content;
+
+        document.getElementById("messages")
+            .appendChild(li);
+    }
+
+    fetch("/rooms/1/messages")
+        .then(response => response.json())
+        .then(messages => {
+
+            messages.forEach(message => {
+                displayMessage(message);
+            });
+
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    stompClient.connect({}, function () {
+
+        console.log("Connected!");
+
+        stompClient.subscribe('/topic/rooms/1', function (message) {
+
+            const data = JSON.parse(message.body);
+
+            displayMessage(data);
+        });
+    });
+
+    function sendMessage() {
+
+        stompClient.send(
+            "/app/send",
+            {},
+            JSON.stringify({
+                roomId: 1,
+                senderUsername: "ethan",
+                content: document.getElementById("message").value
+            })
+        );
+    }
+
+</script>
+
+</body>
+</html>
